@@ -1,0 +1,99 @@
+task 2
+create a todo list
+html code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Todo List</h1>
+        <input type="text" id="todo-input" placeholder="Add a new task...">
+        <button id="add-btn">Add</button>
+        <ul id="todo-list"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+css code
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+input[type="text"] {
+    width: calc(100% - 80px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    background-color: #5cb85c;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+li.completed {
+    text-decoration: line-through;
+    color: #aaa;
+}
+java script code
+document.getElementById('add-btn').addEventListener('click', function() {
+    const input = document.getElementById('todo-input');
+    const newTodoText = input.value.trim();
+
+    if (newTodoText !== '') {
+        const li = document.createElement('li');
+        li.textContent = newTodoText;
+
+        li.addEventListener('click', function() {
+            li.classList.toggle('completed');
+        });
+
+        document.getElementById('todo-list').appendChild(li);
+        input.value = '';
+    }
+});
+
+document.getElementById('todo-input').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        document.getElementById('add-btn').click();
+    }
+});
